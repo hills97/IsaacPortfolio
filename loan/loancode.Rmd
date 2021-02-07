@@ -5,6 +5,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
 ```
 
 # Data cleaning
@@ -25,8 +26,15 @@ head(loan, )
 
 ```
 
-# Visualization prep 
-```{r  visualization prep}
+# Visualization 
+```{r  visualization }
+
+#Presents relationship between applicant's income and amount of loan in a scatter plot
+ggplot(data = loan) + 
+  geom_point(mapping = aes(x = LoanAmount, y = ApplicantIncome ))
 
 
 ```
+
+
+
