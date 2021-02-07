@@ -1,0 +1,32 @@
+---
+title: "Loan"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data cleaning
+Checking and erasing missing data. 
+
+```{r Cleaning}
+# Dataset of 614 loan ID
+loan <- read.csv(file = "loanapproval.csv") 
+
+#Indicates rows and columns of missing data
+which(is.na(loan), arr.ind=TRUE)
+
+#Removes rows with missing data. 
+loan <- na.omit(loan)
+
+#Showing cleaned dataset of 529 loan Id. 
+head(loan, )
+
+```
+
+# Visualization prep 
+```{r  visualization prep}
+
+
+```
