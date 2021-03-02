@@ -81,6 +81,7 @@ ggplot(data = loan_xoutlier) +
 
 ```{r Visualization III}
 
+#Presenting ratio of approved and disapproved loan status by dividing combined income over loan amount requested. 
 loan_xoutlier$Income_Loan_Ratio <-  (loan_xoutlier[,9] * 1000) / loan_xoutlier[,14] 
 
 ggplot(loan_xoutlier, 
@@ -101,3 +102,4 @@ ggplot(loan_xoutlier,
   labs(title = "Loan / Income Ratio")
 
 ```
+
