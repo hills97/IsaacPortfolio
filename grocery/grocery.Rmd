@@ -8,11 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
-library(lubridate)  
-library(arules)     
-library(arulesViz)  
 library(knitr)
-grocery <- read.csv(file = "groceryceries_dataset.csv")
+grocery <- read.csv("Groceries_dataset.csv")
 ```
 
 #### Before clean up  

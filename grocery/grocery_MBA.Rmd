@@ -18,7 +18,7 @@ if(sessionInfo()['basePkgs']=="tm" | sessionInfo()['otherPkgs']=="tm"){
 library(plyr)
 library(arules)
 library(arulesViz)
-grocery <- read.csv("grocery_dataset.csv")
+grocery <- read.csv("Groceries_dataset.csv")
 ```
 
 #### Cleaning and exploring 
