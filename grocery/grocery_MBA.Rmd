@@ -1,0 +1,37 @@
+---
+title: "grocery MBA"
+author: "Donggyu Isaac Hills"
+date: '2021 3 23 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+if(sessionInfo()['basePkgs']=="dplyr" | sessionInfo()['otherPkgs']=="dplyr"){
+  detach(package:dplyr, unload=TRUE)
+}
+
+if(sessionInfo()['basePkgs']=="tm" | sessionInfo()['otherPkgs']=="tm"){
+  detach(package:sentiment, unload=TRUE)
+  detach(package:tm, unload=TRUE)
+}
+
+library(plyr)
+library(arules)
+library(arulesViz)
+grocery <- read.csv("grocery_dataset.csv")
+```
+
+#### Cleaning and exploring 
+```{r cleaning&exploring}
+sum(is.na(grocery))
+str(grocery)
+head(grocery)
+sorted <- grocery[order(grocery$Member_number),]
+```
+
+#### Including Plots
+
+
+```{r , echo=FALSE}
+```
+

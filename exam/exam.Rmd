@@ -13,8 +13,6 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(caTools)
-
-
 exam <- read.csv(file = "StudentsPerformance.csv")
 ```
 
@@ -56,8 +54,8 @@ gender_reading_graph <- exam %>% select(gender, `reading_score`) %>% filter(!is.
 gender_writing_graph <- exam %>% select(gender, `writing_score`) %>% filter(!is.na(writing_score)) %>% ggplot(aes(x=gender, y = writing_score, color = gender)) + geom_boxplot() + geom_jitter(width = 0.2, alpha = 0.2)
 ```
 
-```{r gender graph , echo=FALSE}
 ## Does gender affect performance?
+```{r gender graph , echo=FALSE}
 num_gender
 plot_gender
 mean_gender 
@@ -213,7 +211,7 @@ Analysis   <br>1. In this dataset, there are 355 students who receive free/reduc
            performance and their lunch type.<br>
            
 ```{r Linear}
-#Predicting the reading score by using writing score
+# Predicting the reading score by using writing score
 cor(exam$reading_score,exam$writing_score)
 
 score <- exam[,-2:-5]
@@ -222,23 +220,23 @@ ggplot(exam,aes(x=reading_score,y=writing_score))+
 geom_point()+
 stat_smooth(method= "lm",col="blue")
 
-#Split data set into 2 
+# Split data set into 2 
 split <- sample.split(score,SplitRatio = 0.75)
 train <- subset(score, split="TRUE")
 test <- subset(score, split="FALSE")
 
-#Linear Model
+# Linear Model
 lm <- lm(exam$reading_score~exam$writing_score,data=train)
 summary(lm)
 
-#Predict the reading score
+# Predict the reading score
 reading_predict <- predict(lm,train)
 
-#Predict reading data vs Actual reading data 
+# Predict reading data vs Actual reading data 
 plot(exam$reading_score,type="l",lty=1.8,col="red")
 lines(reading_predict,type="l", col="blue")
 
-#predict the reading score using math score
+# Predict the reading score using math score
 cor(exam$reading_score,exam$math_score)
 
 ggplot(exam,aes(x=reading_score,y=math_score))+
@@ -250,7 +248,7 @@ summary(lm_df)
 
 reading_predict_2 <- predict(lm_df,train)
 
-#predicted reading score vs actual reading score
+# Predicted reading score vs actual reading score
 plot(score$reading_score,type="l",col="red")
 lines(reading_predict_2,type="l",col="blue")
 ```
