@@ -1,5 +1,6 @@
 ---
 title: "Loan"
+author: "Donggyu Isaac Hills"
 output: 
   html_document:
     keep_md: true
