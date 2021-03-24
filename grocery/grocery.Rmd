@@ -1,14 +1,16 @@
 ---
 title: "grocery"
 author: "Donggyu Isaac Hills"
-date: '2021 3 16 '
-output: html_document
+output: 
+  html_document:
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(knitr)
+library(lubridate)
 grocery <- read.csv("Groceries_dataset.csv")
 ```
 
@@ -52,7 +54,7 @@ item_list
 ```
 
 ```{r Count and prep visualization for top ten }
-count <- count(grocerycery, grocery$item)
+count <- count(grocery, grocery$item)
 names(count) <- c("item", "num")
 
 # sort items by number of times purchased
@@ -89,7 +91,7 @@ day$weekday <- factor(day$weekday, levels = c('Sunday', 'Monday', 'Tuesday',
                                'Wednesday', 'Thursday', 'Friday', 'Saturday'))
 # Arrange shopping trips by days of the week count them by day
 daily_trans <- day %>%
-  groceryup_by(weekday) %>%
+  group_by(weekday) %>%
   dplyr::summarize(n = n())
   
 per_day <- ggplot(data = day, aes(x = weekday), ) +
@@ -119,10 +121,10 @@ citrus_fruit <- grocery[grocery$item == "citrus fruit",-c(1,2,3,6)]
 water <- grocery[grocery$item == "bottled water",-c(1,2,3,6)]
 sausage <- grocery[grocery$item == "sausage",-c(1,2,3,6)]
 
-# Combine two years of data and groceryup by month of the year
+# Combine two years of data and group by month of the year
 by_month <- function(x) {
     x %>%
-        groceryup_by(month) %>%
+        group_by(month) %>%
         dplyr::summarize(num = n())
 }
 

@@ -1,9 +1,9 @@
 ---
 title: "grocery MBA"
 author: "Donggyu Isaac Hills"
-date: '2021 3 23 '
-output: html_document
----
+output: 
+  html_document:
+    keep_md: true---
 
 ```{r setup, include=FALSE}
 if(sessionInfo()['basePkgs']=="dplyr" | sessionInfo()['otherPkgs']=="dplyr"){
