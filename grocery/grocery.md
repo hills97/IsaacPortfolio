@@ -1,5 +1,5 @@
 ---
-title: "grocery"
+title: "grocery analysis"
 author: "Donggyu Isaac Hills"
 output: 
   html_document:
@@ -65,6 +65,10 @@ paste0("From 2014 to 2015, there were ",num_trans, " transactions.")
 |1187      |2015-12-12 |other vegetables |118716781 |    12|Saturday |
 |3037      |2015-02-01 |whole milk       |303716467 |     2|Sunday   |
 |4941      |2015-02-14 |rolls/buns       |494116480 |     2|Saturday |
+
+<br>The dataset now contains the unique transaction id which will be used in a weekly and monthly analysis. <br>
+
+<br> <br>
 
 <br> Here is the list of items purchased. <br> 
 
