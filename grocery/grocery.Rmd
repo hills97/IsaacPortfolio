@@ -167,7 +167,7 @@ kable(month_table)
 
 ```{r top six}
 # Plotting top six
-top_six <- ggplot(data = series_table, aes(x = month)) +
+top_six <- ggplot(data = month_table, aes(x = month)) +
     geom_line(aes(y = milk, color = "red")) +    
     geom_line(aes(y = other_veg, color = "green")) + 
     geom_line(aes(y = rolls, color = "black")) +
@@ -186,4 +186,24 @@ top_six <- ggplot(data = series_table, aes(x = month)) +
 
 ```{r top six vis, echo=FALSE}
 top_six
+```
+
+```{r analyzing seasonal product}
+seasonal <- ggplot(data = month_table, aes(x = month)) +
+  geom_line(aes(y = other_veg, color = "green")) +   
+  geom_line(aes(y = root_veg, color = "black")) +    
+  geom_line(aes(y = citrus_fruit, color = "yellow")) +
+  geom_line(aes(y = tropic_fruit, color = "orange")) +
+  scale_x_continuous("month", 
+                     breaks = c(1:12), 
+                     labels = month.abb) +
+  ylab("Number of transactions") +
+  scale_color_identity(name = "Product",
+                       breaks = c("green", "black", "yellow", "orange"),
+                       labels = c("Other Vegetables", "Root Vegetables", "Citrus Fruit","Tropical Fruit"),
+                       guide = "legend")
+```
+
+```{r seasonal visualization, echo=FALSE}
+seasonal
 ```

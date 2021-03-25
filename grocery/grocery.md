@@ -35,17 +35,19 @@ names(grocery) <- c("member_id", "date", "item")
 grocery$member_id <- as_factor(grocery$member_id)
 grocery$date <- as_date(dmy(grocery$date))
 grocery$item <- as_factor(grocery$item)
-# Create new columns with number of dates since #epoch date(January 1, 1970).
+# Create an unique transaction id based on purchased date and #epoch date(January 1, 1970)
 grocery$trans_id <- as_factor(paste0(grocery$member_id, unclass(grocery$date)))
+# Add new columns of month and weekday
 grocery$month <- month(grocery$date)
 grocery$weekday <- weekdays(grocery$date)
 
+# Counting and determining unique values
 item_list <- unique(grocery$item)
 num_items <- length(list)
 member_list <- unique(grocery$member_id)
 num_members <- length(member_list)
 
-# Showing number of transactions. 
+# Showing number of total transactions made from 2014 to 2015
 num_trans <- length(unique(grocery$trans_id))
 paste0("From 2014 to 2015, there were ",num_trans, " transactions.")
 ```
@@ -165,14 +167,14 @@ paste0("From 2014 to 2015, there were ",num_trans, " transactions.")
 count <- count(grocery, grocery$item)
 names(count) <- c("item", "num")
 
-# sort items by number of times purchased
+# Sorting items by number of purchases
 sorted_count <- count[order(-count$num),]
 
-# Add a field that converts count to fraction of total purchases
+# Converting count to fraction of total purchases
 sorted_count$portion <- sorted_count$num/num_trans
 
 top_ten <- sorted_count[1:10,]
-# Reverse the order for horizontal Pareto chart
+# Reversing for horizontal Pareto chart
 top_ten_rev<- sorted_count[10:1,]
 
 #graph for top ten
@@ -199,6 +201,7 @@ top_ten_graph <- ggplot(data = top_ten, aes(x = item, y = portion)) +
 ```
 
 ![](grocery_files/figure-html/Show top ten-1.png)<!-- -->
+
 
 #### Transaction made by day
 
@@ -243,28 +246,28 @@ by_month <- function(x) {
         dplyr::summarize(num = n())
 }
 
-month_milk <- by_month(milk)
-month_other_veg <- by_month(other_veg)
-month_root_veg <- by_month(root_veg)
-month_rolls <- by_month(rolls)
-month_soda <- by_month(soda)
-month_yogurt <- by_month(yogurt)
-month_tropic_fruit <- by_month(tropic_fruit)
-month_citrus_fruit <- by_month(citrus_fruit)
-month_water <- by_month(water)
-month_sausage <- by_month(sausage)
+series_milk <- by_month(milk)
+series_other_veg <- by_month(other_veg)
+series_root_veg <- by_month(root_veg)
+series_rolls <- by_month(rolls)
+series_soda <- by_month(soda)
+series_yogurt <- by_month(yogurt)
+series_tropic_fruit <- by_month(tropic_fruit)
+series_citrus_fruit <- by_month(citrus_fruit)
+series_water <- by_month(water)
+series_sausage <- by_month(sausage)
 
 month_table <- data.frame(month = as.numeric(c(1:12)),
-                                           milk = month_milk$num,
-                                           other_veg = month_other_veg$num,
-                                           root_veg = month_root_veg$num,
-                                           rolls = month_rolls$num,
-                                           soda = month_soda$num,
-                                           yogurt = month_yogurt$num,
-                                           tropic_fruit = month_tropic_fruit$num,
-                                           citrus_fruit =month_citrus_fruit$num,
-                                           water = month_water$num,
-                                           sausage = month_sausage$num)
+                                           milk = series_milk$num,
+                                           other_veg = series_other_veg$num,
+                                           root_veg = series_root_veg$num,
+                                           rolls = series_rolls$num,
+                                           soda = series_soda$num,
+                                           yogurt = series_yogurt$num,
+                                           tropic_fruit = series_tropic_fruit$num,
+                                           citrus_fruit =series_citrus_fruit$num,
+                                           water = series_water$num,
+                                           sausage = series_sausage$num)
 ```
 
 
@@ -304,3 +307,22 @@ top_six <- ggplot(data = month_table, aes(x = month)) +
 ```
 
 ![](grocery_files/figure-html/top six vis-1.png)<!-- -->
+
+
+```r
+seasonal <- ggplot(data = month_table, aes(x = month)) +
+  geom_line(aes(y = other_veg, color = "green")) +   
+  geom_line(aes(y = root_veg, color = "black")) +    
+  geom_line(aes(y = citrus_fruit, color = "yellow")) +
+  geom_line(aes(y = tropic_fruit, color = "orange")) +
+  scale_x_continuous("month", 
+                     breaks = c(1:12), 
+                     labels = month.abb) +
+  ylab("Number of transactions") +
+  scale_color_identity(name = "Product",
+                       breaks = c("green", "black", "yellow", "orange"),
+                       labels = c("Other Vegetables", "Root Vegetables", "Citrus Fruit","Tropical Fruit"),
+                       guide = "legend")
+```
+
+![](grocery_files/figure-html/seasonal visualization-1.png)<!-- -->
