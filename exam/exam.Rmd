@@ -17,7 +17,7 @@ library(caTools)
 exam <- read.csv("StudentsPerformance.csv")
 ```
 
-## Set up 
+#### Set up 
 ```{r set up}
 # Checking if there is any missing values, which returns none
 which(is.na(exam), arr.ind=TRUE)
@@ -29,7 +29,7 @@ head(exam, 3)
 summary(exam)
 ```
 
-## Does gender affect performance?
+#### Does gender affect performance?
 ```{r gender}
 num_gender <- tabyl(exam, gender)
 
@@ -55,7 +55,7 @@ gender_reading_graph <- exam %>% select(gender, `reading_score`) %>% filter(!is.
 gender_writing_graph <- exam %>% select(gender, `writing_score`) %>% filter(!is.na(writing_score)) %>% ggplot(aes(x=gender, y = writing_score, color = gender)) + geom_boxplot() + geom_jitter(width = 0.2, alpha = 0.2)
 ```
 
-## Does gender affect performance?
+#### Does gender affect performance?
 ```{r gender graph , echo=FALSE}
 num_gender
 plot_gender
@@ -71,7 +71,7 @@ Analysis  <br>1. 518 female and 482 male students.<br>
           <br>3. Based on this dataset, a correlation between students' performance 
            and their gender is quite unclear.<br>
 
-## Does race/ethinicity affect performance?
+#### Does race/ethinicity affect performance?
 ```{r Race}
 num_race <- tabyl(exam, race_ethnicity)
 
@@ -117,7 +117,7 @@ Analysis   <br>1. This dataset contains 89 of group A, 190 of group B,319 of gro
            <br>3. Based on this dataset, there is a positive correlation between 
            students' performance and their racial background/ethnicity.<br>
            
-## Does parental education affect performance? 
+#### Does parental education affect performance? 
 ``` {r Parents education}
 num_parent <- tabyl(exam, parental_level_of_education)
 
@@ -167,7 +167,7 @@ Analysis   <br>1. In this dataset, there are 222 of associate's degree, 118 of
            <br>3. Based on this dataset, there is a positive correlation between 
            students' performance and their parental level of education.<br>
 
-## Does type of lunch affect performance?
+#### Does type of lunch affect performance?
 ```{r lunch type}
 num_lunch <- tabyl(exam, lunch)
 
